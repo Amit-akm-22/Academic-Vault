@@ -189,9 +189,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2.5rem;
+  padding: min(2.5rem, 5vw);
   z-index: 10;
   background: #000000;
+  min-height: 100vh;
 }
 
 .auth-visual {
@@ -526,8 +527,22 @@ select.form-input option {
   }
 
   .auth-box {
-    padding: 2rem 1.25rem;
-    margin: 1rem;
+    padding: 1rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .auth-box .form-group {
+    text-align: left;
+  }
+
+  .auth-box>div:first-child>div:first-child {
+    justify-content: center;
+  }
+
+  .auth-box>div:first-child h1,
+  .auth-box>div:first-child p {
+    text-align: center;
   }
 
   .docs-grid {
