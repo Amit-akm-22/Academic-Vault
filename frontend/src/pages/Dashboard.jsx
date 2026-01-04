@@ -14,7 +14,7 @@ const Dashboard = () => {
                 const config = {
                     headers: { Authorization: `Bearer ${user.token}` }
                 };
-                const { data } = await axios.get('http://localhost:5000/api/documents', config);
+                const { data } = await axios.get('https://academic-vault.onrender.com/api/documents', config);
                 setStats({
                     totalDocs: data.length,
                     categories: [...new Set(data.map(d => d.category))].length
