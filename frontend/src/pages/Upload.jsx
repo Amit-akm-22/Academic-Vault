@@ -31,7 +31,7 @@ const Upload = () => {
                 },
             };
 
-            await axios.post('http://localhost:5000/api/documents', formData, config);
+            await axios.post('https://academic-vault.onrender.com/api/documents', formData, config);
             setMessage({ type: 'success', text: 'Document secured in vault!' });
             setTimeout(() => navigate('/documents'), 1500);
         } catch (error) {
