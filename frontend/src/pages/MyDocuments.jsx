@@ -18,7 +18,7 @@ const MyDocuments = () => {
                     keyword: search
                 }
             };
-            const { data } = await axios.get('http://localhost:5000/api/documents', config);
+            const { data } = await axios.get('https://academic-vault.onrender.com/api/documents', config);
             setDocuments(data);
         } catch (error) {
             console.error(error);
@@ -35,7 +35,7 @@ const MyDocuments = () => {
                 const config = {
                     headers: { Authorization: `Bearer ${user.token}` }
                 };
-                await axios.delete(`http://localhost:5000/api/documents/${id}`, config);
+                await axios.delete(`https://academic-vault.onrender.com/api/documents/${id}`, config);
                 fetchDocuments();
             } catch (error) {
                 console.error(error);
@@ -45,7 +45,7 @@ const MyDocuments = () => {
     };
 
     const handleDownload = (fileUrl) => {
-        window.open(`http://localhost:5000${fileUrl}`, '_blank');
+        window.open(`https://academic-vault.onrender.com${fileUrl}`, '_blank');
     };
 
     return (
