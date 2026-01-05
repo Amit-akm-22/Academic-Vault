@@ -10,13 +10,17 @@ EduVault is a secure MERN stack application allowing users to store and manage p
 - **Responsive UI**: Modern, glassmorphism-inspired design.
 - **Filtering**: Search and filter documents by category.
 
+
 ## 📸 Screenshots
 
 ### Login Page
-![Login Page](Login.png)
+![Login Page](Assests/Login.png)
 
 ### Dashboard
-![Dashboard](./assets/dashboard_preview.png)
+![Dashboard](Assests/DashBoard.png)
+
+### Upload
+![Dashboard](Assests/Upload.png)
 
 ## 🛠️ Tech Stack
 
@@ -55,3 +59,4 @@ EduVault is a secure MERN stack application allowing users to store and manage p
 3.  View all your files in **My Documents**.
 4.  Use the **Dashboard** for a quick overview.
 #
+
