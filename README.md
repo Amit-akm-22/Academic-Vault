@@ -16,8 +16,12 @@ EduVault is a secure MERN stack application allowing users to store and manage p
 ### Login Page
 ![Login Page](Assests/Login.png)
 
+<br><br>
+
 ### Dashboard
 ![Dashboard](Assests/DashBoard.png)
+
+<br><br>
 
 ### Upload
 ![Dashboard](Assests/Upload.png)
@@ -59,4 +63,5 @@ EduVault is a secure MERN stack application allowing users to store and manage p
 3.  View all your files in **My Documents**.
 4.  Use the **Dashboard** for a quick overview.
 #
+
 
