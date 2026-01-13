@@ -17,13 +17,48 @@ const uploadDocument = async (req, res) => {
             user: req.user._id,
             title,
             category,
-            fileUrl: `/uploads/${req.file.filename}`,
+            fileUrl: `/api/documents/${req.file.originalname}`, // This will be handled by the route
             fileName: req.file.originalname,
             mimeType: req.file.mimetype,
-            size: req.file.size
+            size: req.file.size,
+            fileData: req.file.buffer,
+            fileContentType: req.file.mimetype
         });
 
-        res.status(201).json(doc);
+        res.status(201).json({
+            _id: doc._id,
+            user: doc.user,
+            title: doc.title,
+            category: doc.category,
+            fileName: doc.fileName,
+            mimeType: doc.mimeType,
+            size: doc.size,
+            createdAt: doc.createdAt
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server Error' });
+    }
+};
+
+// @desc    Get a document's actual file
+// @route   GET /api/documents/:id/view
+// @access  Private
+const getFile = async (req, res) => {
+    try {
+        const doc = await Document.findById(req.params.id);
+
+        if (!doc) {
+            return res.status(404).json({ message: 'Document not found' });
+        }
+
+        // Check for user
+        if (doc.user.toString() !== req.user.id) {
+            return res.status(401).json({ message: 'User not authorized' });
+        }
+
+        res.set('Content-Type', doc.fileContentType);
+        res.send(doc.fileData);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Server Error' });
@@ -93,5 +128,6 @@ const deleteDocument = async (req, res) => {
 module.exports = {
     uploadDocument,
     getDocuments,
-    deleteDocument
+    deleteDocument,
+    getFile
 };

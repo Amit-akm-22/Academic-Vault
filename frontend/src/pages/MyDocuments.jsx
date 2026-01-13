@@ -44,8 +44,9 @@ const MyDocuments = () => {
         }
     };
 
-    const handleDownload = (fileUrl) => {
-        window.open(`https://academic-vault.onrender.com${fileUrl}`, '_blank');
+    const handleDownload = (id) => {
+        const url = `https://academic-vault.onrender.com/api/documents/${id}/view`;
+        window.open(url, '_blank');
     };
 
     return (
@@ -148,7 +149,7 @@ const MyDocuments = () => {
 
                             <div style={{ display: 'flex', gap: '0.5rem' }}>
                                 <button
-                                    onClick={() => handleDownload(doc.fileUrl)}
+                                    onClick={() => handleDownload(doc._id)}
                                     className="btn"
                                     style={{ flex: 1, padding: '0.65rem', fontSize: '0.85rem', background: 'white', color: 'black' }}
                                 >

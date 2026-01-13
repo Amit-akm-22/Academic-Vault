@@ -28,6 +28,14 @@ const documentSchema = new mongoose.Schema({
     },
     size: {
         type: Number
+    },
+    fileData: {
+        type: Buffer,
+        required: true
+    },
+    fileContentType: {
+        type: String,
+        required: true
     }
 }, { timestamps: true });
 
