@@ -44,9 +44,25 @@ const MyDocuments = () => {
         }
     };
 
-    const handleDownload = (id) => {
-        const url = `https://academic-vault.onrender.com/api/documents/${id}/view`;
-        window.open(url, '_blank');
+    const handleDownload = async (id) => {
+        try {
+            const config = {
+                headers: { Authorization: `Bearer ${user.token}` },
+                responseType: 'blob'
+            };
+            const { data, headers } = await axios.get(`https://academic-vault.onrender.com/api/documents/${id}/view`, config);
+
+            // Create a blob URL and open it
+            const blob = new Blob([data], { type: headers['content-type'] });
+            const url = URL.createObjectURL(blob);
+            window.open(url, '_blank');
+
+            // Clean up the URL after some time
+            setTimeout(() => URL.revokeObjectURL(url), 10000);
+        } catch (error) {
+            console.error('Error downloading file:', error);
+            alert('Failed to access document. Please try again.');
+        }
     };
 
     return (
