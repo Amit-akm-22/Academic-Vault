@@ -1,13 +1,14 @@
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
+import { GoogleLogin } from '@react-oauth/google';
 import { Mail, Lock, User, UserPlus, ArrowRight } from 'lucide-react';
 
 const Signup = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { register } = useContext(AuthContext);
+    const { register, googleLogin } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -18,6 +19,16 @@ const Signup = () => {
         } catch (error) {
             console.error('Signup Failed', error);
             alert(error.response?.data?.message || 'Error creating account');
+        }
+    };
+
+    const handleGoogleSuccess = async (credentialResponse) => {
+        try {
+            await googleLogin(credentialResponse.credential);
+            navigate('/'); // Redirect to dashboard
+        } catch (error) {
+            console.error('Google Login Failed', error);
+            alert(error.response?.data?.error || error.response?.data?.message || 'Google Login Failed');
         }
     };
 
@@ -93,6 +104,27 @@ const Signup = () => {
                             <span>Create Account</span>
                             <ArrowRight size={18} />
                         </button>
+
+                        <div style={{ margin: '1.5rem 0', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                            <div style={{ flex: 1, height: '1px', background: '#222' }}></div>
+                            <span style={{ fontSize: '0.65rem', color: '#444', fontWeight: '800' }}>OR CONTINUE WITH</span>
+                            <div style={{ flex: 1, height: '1px', background: '#222' }}></div>
+                        </div>
+
+                        <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+                            <GoogleLogin
+                                theme="filled_black"
+                                shape="pill"
+                                size="large"
+                                text="continue_with"
+                                width="340"
+                                onSuccess={handleGoogleSuccess}
+                                onError={() => {
+                                    console.log('Signup Failed');
+                                    alert('Google Signup Failed');
+                                }}
+                            />
+                        </div>
                     </form>
 
                     <p style={{ marginTop: '2rem', textAlign: 'center', fontSize: '0.85rem' }}>
