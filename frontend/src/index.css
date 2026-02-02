@@ -33,7 +33,7 @@ html {
 
 body {
   margin: 0;
-  min-height: 100vh;
+  min-height: 125vh;
   background-color: var(--bg-dark);
   color: var(--text-main);
   overflow-x: hidden;
@@ -185,7 +185,7 @@ body {
 /* Forms & Auth Redesign */
 .auth-container {
   display: flex;
-  min-height: 100vh;
+  min-height: 125vh;
   background: var(--bg-dark);
   color: var(--text-main);
   /* overflow: hidden; Removed to allow scrolling on mobile */
@@ -199,7 +199,7 @@ body {
   padding: min(2.5rem, 5vw);
   z-index: 10;
   background: #000000;
-  min-height: 100dvh;
+  min-height: 125dvh;
   overflow-y: auto;
   /* Added to allow scrolling if content is tall */
 }
