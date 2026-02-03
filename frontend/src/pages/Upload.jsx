@@ -10,7 +10,28 @@ const Upload = () => {
     const [title, setTitle] = useState('');
     const [category, setCategory] = useState('Certificate');
     const [message, setMessage] = useState(null);
+    const [isDragging, setIsDragging] = useState(false);
     const navigate = useNavigate();
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+        setIsDragging(true);
+    };
+
+    const handleDragLeave = (e) => {
+        e.preventDefault();
+        setIsDragging(false);
+    };
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        setIsDragging(false);
+        const droppedFile = e.dataTransfer.files[0];
+        if (droppedFile) {
+            setFile(droppedFile);
+        }
+    };
+
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
@@ -112,7 +133,18 @@ const Upload = () => {
 
                     <div className="form-group">
                         <label className="form-label">Vault Storage</label>
-                        <div className="upload-area" onClick={() => document.getElementById('fileInput').click()}>
+                        <div
+                            className={`upload-area ${isDragging ? 'dragging' : ''}`}
+                            onClick={() => document.getElementById('fileInput').click()}
+                            onDragOver={handleDragOver}
+                            onDragLeave={handleDragLeave}
+                            onDrop={handleDrop}
+                            style={{
+                                borderColor: isDragging ? 'var(--text-main)' : 'var(--glass-border)',
+                                background: isDragging ? 'rgba(255, 255, 255, 0.08)' : 'var(--glass-bg)',
+                                transition: 'all 0.3s ease'
+                            }}
+                        >
                             {file ? (
                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                     <div style={{ width: '60px', height: '60px', borderRadius: '1rem', background: 'var(--glass-bg)', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '1rem', border: '1px solid var(--glass-border)' }}>
